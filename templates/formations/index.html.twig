@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Formations {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+
+	<a class="new" href="{{ path('app_formations_new') }}">Crée une nouvelle formation</a>
+
+	<h1 id="h1-formation">Les Formations disponible :</h1>
+
+	<div id="formations-section">
+		{% for formation in formations %}
+			<div class="formation-card">
+				<div class="formation-card-content">
+					<div class="formation-card-title">{{ formation.title }}</div>
+					<div class="formation-card-details">
+						<p>
+							<strong>Résumé:</strong>
+							{{ formation.resume }}</p>
+						<p>
+							<strong>Explication:</strong>
+							{{ formation.explication }}</p>
+						<p>
+							<strong>Duree:</strong>
+							{{ formation.duree }}</p>
+						<p>
+							<strong>Niveau:</strong>
+							{{ formation.niveau }}</p>
+						<p>
+							<strong>Lieu:</strong>
+							{{ formation.lieu }}</p>
+					</div>
+					<div class="formation-card-actions">
+						<a href="{{ path('app_formations_show', {'id': formation.id}) }}">En voir plus</a>
+						<a href="{{ path('app_formations_edit', {'id': formation.id}) }}">Modifier</a>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<p>No records found.</p>
+		{% endfor %}
+	</div>
+
+{% endblock %}
